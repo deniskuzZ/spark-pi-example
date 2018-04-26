@@ -3,7 +3,7 @@ pipeline:
     image: banzaicloud/plugin-pipeline-client:0.3.0
     cluster_name: "spark-pipeline-5"
     cluster_provider: "google"
-    google_project: "spark-pi-example"
+    google_project: "vivid-memento-199713"
     google_gke_version: "1.9"
     google_node_count: "2"
     log_level: "debug"
