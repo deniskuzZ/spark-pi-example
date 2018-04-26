@@ -1,9 +1,10 @@
 pipeline:
   create_cluster:
     image: banzaicloud/plugin-pipeline-client:0.3.0
-    cluster_name: "[[your-cluster-name]]"
+    cluster_name: "spark-pi-1"
     cluster_provider: "google"
-    google_project: "[[your-google-project]]"
+    google_project: "spark-pi-example"
+    google_gke_version: "1.9"
     google_node_count: "2"
 
     secrets: [plugin_endpoint, plugin_token]
@@ -22,11 +23,7 @@ pipeline:
     deployment_release_name: "release-1"
     deployment_values:
      historyServer:
-        enabled: true
-     spark-hs:
-       app:
-         logDirectory: "gs://[[your-gs-bucket]]/"
-
+        enabled: false
     secrets: [plugin_endpoint, plugin_token]
 
   remote_checkout:
@@ -62,7 +59,7 @@ pipeline:
       spark.kubernetes.authenticate.driver.serviceAccountName: spark
       spark.metrics.conf: /opt/spark/conf/metrics.properties
       spark.eventLog.enabled: "true"
-      spark.eventLog.dir: "gs://[[your-gs-bucket]]/"
+      spark.eventLog.dir: ""
     spark_submit_app_args:
       - target/spark-pi-1.0-SNAPSHOT.jar
       - 1000
